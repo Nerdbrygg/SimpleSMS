@@ -1,0 +1,42 @@
+{
+    "name": "nerdbrygg/simplesms",
+    "description": ":package_description",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jørn Lemika",
+            "email": "jorn@lemika.net"
+        }
+    ],
+    "homepage": "https://github.com/nerdbrygg/simplesms",
+    "keywords": ["Laravel", "SimpleSMS"],
+    "require": {
+        "illuminate/support": "~5|~6|~7"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0",
+        "mockery/mockery": "^1.1",
+        "orchestra/testbench": "~3|~4",
+        "sempro/phpunit-pretty-print": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nerdbrygg\\SimpleSMS\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Nerdbrygg\\SimpleSMS\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Nerdbrygg\\SimpleSMS\\SimpleSMSServiceProvider"
+            ],
+            "aliases": {
+                "SimpleSMS": "Nerdbrygg\\SimpleSMS\\Facades\\SimpleSMS"
+            }
+        }
+    }
+}
