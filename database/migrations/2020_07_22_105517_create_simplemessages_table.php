@@ -14,7 +14,7 @@ class CreateSimplemessagesTable extends Migration
     public function up()
     {
         Schema::create('simplemessages', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
 
             $table->string('source')->default('SimpleSMS Default');
             $table->string('destination');

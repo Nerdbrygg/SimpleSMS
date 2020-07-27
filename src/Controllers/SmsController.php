@@ -2,7 +2,7 @@
 
 namespace Nerdbrygg\SimpleSMS\Controllers;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use Nerdbrygg\SimpleSMS\Facades\SimpleSMS;
 use Nerdbrygg\SimpleSMS\SMS;
 

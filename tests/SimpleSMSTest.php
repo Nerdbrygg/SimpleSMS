@@ -1,11 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Http;
+namespace Nerdbrygg\SimpleSMS\Tests;
+
+use Illuminate\Http\Client\Response;
+use \Illuminate\Support\Facades\Http;
 use Nerdbrygg\SimpleSMS\Exceptions\MissingParameter;
 use Nerdbrygg\SimpleSMS\Exceptions\ProviderNotFound;
 use Nerdbrygg\SimpleSMS\Facades\SimpleSMS;
 use Nerdbrygg\SimpleSMS\SimpleSMS as SimpleSMSClass;
-use PHPUnit\Framework\TestCase;
 
 class SimpleSMSTest extends TestCase
 {
@@ -44,7 +46,7 @@ class SimpleSMSTest extends TestCase
 
         $response = SimpleSMS::to('4711111111')->message('Hello World.')->send();
 
-        $this->assertInstanceOf(Illuminate\Http\Client\Response::class, $response);
+        $this->assertInstanceOf(Response::class, $response);
         $this->assertEquals(200, $response->getStatusCode());
     }
 }
