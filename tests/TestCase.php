@@ -33,7 +33,7 @@ abstract class TestCase extends TestBench
     protected function getPackageProviders($app)
     {
         return [
-            \Nerdbrygg\SimpleSMS\SimpleSMSServiceProvider::class
+            \Nerdbrygg\SimpleSMS\SimpleSMSServiceProvider::class,
         ];
     }
 

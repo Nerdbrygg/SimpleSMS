@@ -14,7 +14,7 @@ class SMSTest extends TestCase
     {
         parent::setUp();
 
-        $this->loadMigrationsFrom(realpath(__DIR__ . '../database/migrations'));
+        $this->loadMigrationsFrom(realpath(__DIR__.'../database/migrations'));
     }
 
     /** @test */
@@ -28,7 +28,7 @@ class SMSTest extends TestCase
 
         $this->post(route('sms.store', [
             'destination' => '4711111111',
-            'message' => 'Test message'
+            'message' => 'Test message',
         ]));
 
         $this->assertDatabaseMissing('simplemessages', ['message' => 'Test message']);
@@ -45,7 +45,7 @@ class SMSTest extends TestCase
 
         $this->post(route('sms.store', [
             'destination' => '4711111111',
-            'message' => 'Test message'
+            'message' => 'Test message',
         ]));
 
         $this->assertDatabaseHas('simplemessages', ['message' => 'Test message']);
@@ -63,12 +63,12 @@ class SMSTest extends TestCase
 
         $this->post(route('sms.store', [
             'destination' => '4711111111',
-            'message' => 'Test message'
+            'message' => 'Test message',
         ]));
 
         $this->assertDatabaseHas('simplemessages', [
             'destination' => '4711111111',
-            'message' => 'Test message'
+            'message' => 'Test message',
         ]);
     }
 }
