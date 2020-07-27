@@ -14,10 +14,10 @@ class ProviderRepository
      */
     public function make($provider)
     {
-        $class = 'Nerdbrygg\\SimpleSMS\\Providers\\' . str_replace(' ', '', $provider);
+        $class = 'Nerdbrygg\\SimpleSMS\\Providers\\'.str_replace(' ', '', $provider);
 
-        if (!class_exists($class)) {
-            throw new ProviderNotFound('Provider not found for ' . $provider);
+        if (! class_exists($class)) {
+            throw new ProviderNotFound('Provider not found for '.$provider);
         }
 
         return new $class;

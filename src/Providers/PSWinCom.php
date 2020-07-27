@@ -15,7 +15,7 @@ class PSWinCom implements SMSProviderInterface
             'PW' => config('simplesms.pswincom.password'),
             'RCV' => $sms->getDestination(),
             'SND' => $sms->getSource(),
-            'TXT' => $sms->getMessage()
+            'TXT' => $sms->getMessage(),
         ];
 
         return Http::asForm()->post(config('simplesms.pswincom.uri'), $attributes);

@@ -8,22 +8,22 @@ use Nerdbrygg\SimpleSMS\Providers\ProviderRepository;
 class SimpleSMS
 {
     /**
-     * @var string $message
+     * @var string
      */
     protected $message;
 
     /**
-     * @var string $destination
+     * @var string
      */
     protected $destination;
 
     /**
-     * @var string $source
+     * @var string
      */
     protected $source;
 
     /**
-     * @var string $provider
+     * @var string
      */
     protected $provider;
 
@@ -38,7 +38,7 @@ class SimpleSMS
             $this->source = config('simplesms.default.source');
         }
 
-        if (!is_null($provider)) {
+        if (! is_null($provider)) {
             return $this->provider = $provider;
         }
 
@@ -115,7 +115,7 @@ class SimpleSMS
     }
 
     /**
-     * Send the message
+     * Send the message.
      *
      * @return bool
      */

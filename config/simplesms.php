@@ -43,6 +43,6 @@ return [
     'pswincom' => [
         'uri' => 'https://simple.pswin.com/',
         'username' => env('SIMPLESMS_USERNAME'),
-        'password' => env('SIMPLESMS_PASSWORD')
+        'password' => env('SIMPLESMS_PASSWORD'),
     ],
 ];

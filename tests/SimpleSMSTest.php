@@ -3,7 +3,7 @@
 namespace Nerdbrygg\SimpleSMS\Tests;
 
 use Illuminate\Http\Client\Response;
-use \Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Http;
 use Nerdbrygg\SimpleSMS\Exceptions\MissingParameter;
 use Nerdbrygg\SimpleSMS\Exceptions\ProviderNotFound;
 use Nerdbrygg\SimpleSMS\Facades\SimpleSMS;
