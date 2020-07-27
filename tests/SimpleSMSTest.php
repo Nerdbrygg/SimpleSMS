@@ -5,7 +5,7 @@ use Nerdbrygg\SimpleSMS\Exceptions\MissingParameter;
 use Nerdbrygg\SimpleSMS\Exceptions\ProviderNotFound;
 use Nerdbrygg\SimpleSMS\Facades\SimpleSMS;
 use Nerdbrygg\SimpleSMS\SimpleSMS as SimpleSMSClass;
-use Tests\TestCase;
+use PHPUnit\Framework\TestCase;
 
 class SimpleSMSTest extends TestCase
 {

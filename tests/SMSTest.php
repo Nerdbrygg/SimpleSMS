@@ -3,11 +3,13 @@
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
-use Tests\TestCase;
+use Illuminate\Foundation\Testing\TestCase;
+use Tests\CreatesApplication;
 
 class SMSTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase,
+        CreatesApplication;
 
     /** @test */
     public function it_stores_a_record_in_the_database()
