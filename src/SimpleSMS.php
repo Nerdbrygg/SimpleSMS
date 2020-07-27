@@ -117,7 +117,7 @@ class SimpleSMS
     /**
      * Send the message
      *
-     * @return boolean
+     * @return bool
      */
     public function send()
     {

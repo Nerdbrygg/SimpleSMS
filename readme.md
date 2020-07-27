@@ -30,6 +30,14 @@ SIMPLESMS_PASSWORD=
 SimpleSMS::to(<areacode><number>)->message(<message>)->from(<optional sender number>)->send();
 ```
 
+### Parameters
+
+| Parameter | Required | Default |
+|-----------|:--------:|---------|
+| to()      | Yes      | None    |
+| message() | Yes      | None    |
+| from()    | No       | SIMPLESMS_SOURCE |
+
 ## Change log
 
 Please see the [changelog](changelog.md) for more information on what has changed recently.
@@ -50,7 +58,7 @@ If you discover any security related issues, please email author email instead o
 
 ## Credits
 
-- [author name][link-author]
+- [Nerdbrygg][link-author]
 - [All Contributors][link-contributors]
 
 ## License
@@ -60,11 +68,11 @@ license. Please see the [license file](license.md) for more information.
 [ico-version]: https://img.shields.io/packagist/v/nerdbrygg/simplesms.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/nerdbrygg/simplesms.svg?style=flat-square
 [ico-travis]: https://img.shields.io/travis/nerdbrygg/simplesms/master.svg?style=flat-square
-[ico-styleci]: https://styleci.io/repos/12345678/shield
+[ico-styleci]: https://styleci.io/repos/281634119/shield
 
 [link-packagist]: https://packagist.org/packages/nerdbrygg/simplesms
 [link-downloads]: https://packagist.org/packages/nerdbrygg/simplesms
 [link-travis]: https://travis-ci.org/nerdbrygg/simplesms
-[link-styleci]: https://styleci.io/repos/12345678
+[link-styleci]: https://styleci.io/repos/281634119
 [link-author]: https://github.com/nerdbrygg
 [link-contributors]: ../../contributors
