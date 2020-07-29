@@ -49,4 +49,16 @@ class SimpleSMSTest extends TestCase
         $this->assertInstanceOf(Response::class, $response);
         $this->assertEquals(200, $response->getStatusCode());
     }
+
+    /** @test */
+    public function it_can_change_the_source()
+    {
+        Http::fake(function () {
+            return Http::response('OK', 200);
+        });
+
+        $message = SimpleSMS::to('4711111111')->from('Hello World')->message('Hello Universe.');
+
+        $this->assertEquals('Hello World', $message->getSource());
+    }
 }

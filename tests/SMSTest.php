@@ -15,21 +15,25 @@ class SMSTest extends TestCase
         parent::setUp();
 
         $this->loadMigrationsFrom(realpath(__DIR__.'../database/migrations'));
+
+        Http::fake(function () {
+            return Http::response('OK', 200);
+        });
     }
 
     /** @test */
     public function it_encrypts_messages()
     {
-        Http::fake(function () {
-            return Http::response('OK', 200);
-        });
-
         Config::set('simplesms.messages.encryption', true);
 
-        $this->post(route('sms.store', [
+        $this->post(route('sms.store'), [
             'destination' => '4711111111',
             'message' => 'Test message',
-        ]));
+        ]);
+
+        $this->assertDatabaseHas('simplemessages', [
+            'destination' => '4711111111',
+        ]);
 
         $this->assertDatabaseMissing('simplemessages', ['message' => 'Test message']);
     }
@@ -37,10 +41,6 @@ class SMSTest extends TestCase
     /** @test */
     public function it_doesnt_encrypt_messages()
     {
-        Http::fake(function () {
-            return Http::response('OK', 200);
-        });
-
         Config::set('simplesms.messages.encryption', false);
 
         $this->post(route('sms.store', [
@@ -48,16 +48,15 @@ class SMSTest extends TestCase
             'message' => 'Test message',
         ]));
 
-        $this->assertDatabaseHas('simplemessages', ['message' => 'Test message']);
+        $this->assertDatabaseHas('simplemessages', [
+            'destination' => '4711111111',
+            'message' => 'Test message',
+        ]);
     }
 
     /** @test */
     public function it_stores_a_record_in_the_database()
     {
-        Http::fake(function () {
-            return Http::response('OK', 200);
-        });
-
         Config::set('simplesms.messages.save', true);
         Config::set('simplesms.messages.encryption', false);
 
@@ -69,6 +68,20 @@ class SMSTest extends TestCase
         $this->assertDatabaseHas('simplemessages', [
             'destination' => '4711111111',
             'message' => 'Test message',
+        ]);
+    }
+
+    /** @test */
+    public function it_saves_the_source_in_the_database()
+    {
+        $this->post(route('sms.store', [
+            'destination' => '4711111111',
+            'message' => 'Test message',
+            'source' => 'TheForce',
+        ]));
+
+        $this->assertDatabaseHas('simplemessages', [
+            'source' => 'TheForce',
         ]);
     }
 }
