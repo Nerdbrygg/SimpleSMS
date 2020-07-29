@@ -16,7 +16,7 @@ class CreateSimplemessagesTable extends Migration
         Schema::create('simplemessages', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->bigunsignedInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('source')->default('SimpleSMS');
             $table->string('destination');
             $table->text('message');
