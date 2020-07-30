@@ -1,6 +1,6 @@
 {
     "name": "nerdbrygg/simplesms",
-    "description": ":package_description",
+    "description": "Integrates PSWinCom's Simple SMS API with Laravel.",
     "license": "MIT",
     "authors": [
         {

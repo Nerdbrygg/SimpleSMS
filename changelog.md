@@ -5,6 +5,7 @@ All notable changes to `SimpleSMS` will be documented in this file.
 ## Version 0.2
 
 ### Added
+- Nullable user_id field, for optional relationships.
 - License
 - Some ReadMe stuff.
 - Fixed Travis CI

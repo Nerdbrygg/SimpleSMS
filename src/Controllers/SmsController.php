@@ -32,6 +32,8 @@ class SmsController extends Controller
 
             $attributes['status'] = $response->getReasonPhrase();
 
+            $attributes['user_id'] = (auth()->id() ?: null);
+
             if (config('simplesms.messages.encryption')) {
                 $attributes['message'] = encrypt($attributes['message']);
             }

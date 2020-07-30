@@ -5,7 +5,7 @@
 [![Build Status][ico-travis]][link-travis]
 [![StyleCI][ico-styleci]][link-styleci]
 
-First Laravel Package, uses Laravel's Http client to interact with [PSWin.com's](https://wiki.pswin.com/Gateway%20HTTP%20API.ashx) Simple HTTP API.
+My first Laravel Package, uses Laravel's Http client to interact with [PSWin.com's](https://wiki.pswin.com/Gateway%20HTTP%20API.ashx) Simple HTTP API.
 
 It offers the option to store messages in a database table, and also ability to encrypt/decrypt the message, for added security.
 
