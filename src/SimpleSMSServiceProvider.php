@@ -3,6 +3,8 @@
 namespace Nerdbrygg\SimpleSMS;
 
 use Illuminate\Support\ServiceProvider;
+use Nerdbrygg\SimpleSMS\View\Components\Form;
+use Nerdbrygg\SimpleSMS\View\Components\Messages;
 
 class SimpleSMSServiceProvider extends ServiceProvider
 {
@@ -17,6 +19,10 @@ class SimpleSMSServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'nerdbrygg');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutesFrom(__DIR__.'/routes.php');
+        $this->loadViewComponentsAs('simplesms', [
+            Form::class,
+            Messages::class,
+        ]);
 
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {

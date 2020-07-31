@@ -21,15 +21,22 @@ class SmsController extends Controller
      */
     public function store()
     {
+        $attributes = request()->validate([
+            'source' => 'sometimes',
+            'destination' => 'required',
+            'message' => 'required',
+        ]);
+
+        if ($attributes['source'] == null) {
+            $attributes['source'] = config('simplesms.default.source');
+        }
+
+        $response = SimpleSMS::to($attributes['destination'])
+            ->message($attributes['message'])
+            ->from($attributes['source'])
+            ->send();
+
         if (config('simplesms.messages.save')) {
-            $attributes = request()->validate([
-                'source' => 'sometimes',
-                'destination' => 'required',
-                'message' => 'required',
-            ]);
-
-            $response = SimpleSMS::to($attributes['destination'])->message($attributes['message'])->send();
-
             $attributes['status'] = $response->getReasonPhrase();
 
             $attributes['user_id'] = (auth()->id() ?: null);
@@ -41,6 +48,6 @@ class SmsController extends Controller
             SMS::create($attributes);
         }
 
-        return back();
+        return redirect()->back();
     }
 }
