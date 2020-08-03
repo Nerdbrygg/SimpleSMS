@@ -12,7 +12,7 @@
 
         <div class="form-group">
             <label for="destination">{{ __('Destination') }}</label>
-            <input type="text" name="destination" id="destination" class="form-control @error('destination') is-invalid @enderror" placeholder="{{ __('Destination') }}">
+            <input type="text" name="destination" id="destination" class="form-control @error('destination') is-invalid @enderror" placeholder="{{ __('Destination') }}" value="{{ old('destination') }}">
             @error('destination')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -22,7 +22,7 @@
 
         <div class="form-group">
             <label for="message">{{ __('Message') }}</label>
-            <textarea name="message" id="message" class="form-control @error('message') is-invalid @enderror" placeholder="{{ __('Message') }}"></textarea>
+            <textarea name="message" id="message" class="form-control @error('message') is-invalid @enderror" placeholder="{{ __('Message') }}">{{ old('message') }}</textarea>
             @error('message')
                 <div class="invalid-feedback">
                     {{ $message }}

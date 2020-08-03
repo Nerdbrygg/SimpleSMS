@@ -27,8 +27,8 @@ class SmsController extends Controller
             'message' => 'required',
         ]);
 
-        if ($attributes['source'] == null) {
-            $attributes['source'] = config('simplesms.default.source');
+        if (! isset($attributes['source']) || is_null($attributes['source'])) {
+            $attributes['source'] = config('simplesms.default.source', 'SimpleSMS');
         }
 
         $response = SimpleSMS::to($attributes['destination'])
