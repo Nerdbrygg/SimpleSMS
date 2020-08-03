@@ -5,10 +5,12 @@
     <form action="{{ route('sms.store') }}" method="post">
         @csrf
 
-        <div class="form-group">
-            <label for="source">{{ __('Source') }}</label>
-            <input type="text" name="source" id="source" class="form-control @error('source') is-invalid @enderror" placeholder="{{ __('Source') }}">
-        </div>
+        @if ($source)
+            <div class="form-group">
+                <label for="source">{{ __('Source') }}</label>
+                <input type="text" name="source" id="source" class="form-control @error('source') is-invalid @enderror" placeholder="{{ __('Source') }}">
+            </div>
+        @endif
 
         <div class="form-group">
             <label for="destination">{{ __('Destination') }}</label>

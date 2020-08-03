@@ -2,6 +2,18 @@
 
 All notable changes to `SimpleSMS` will be documented in this file.
 
+## Version 0.2.3
+
+### Added
+- Blade Components: Form and Messages.
+- Optional source-parameter on Form component.
+- Composer script "test", just so that the readme is correct.
+
+### Removed 
+- create.blade.php view.
+- Route::get('sms') from routes.
+- Controller method create().
+
 ## Version 0.2.1
 
 ### Added

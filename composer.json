@@ -39,5 +39,10 @@
                 "SimpleSMS": "Nerdbrygg\\SimpleSMS\\Facades\\SimpleSMS"
             }
         }
+    },
+    "scripts": {
+        "test": [
+            "phpunit"
+        ]
     }
 }

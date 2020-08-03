@@ -9,14 +9,6 @@ use Nerdbrygg\SimpleSMS\SMS;
 class SmsController extends Controller
 {
     /**
-     * Return send-sms view.
-     */
-    public function create()
-    {
-        return view('nerdbrygg::create');
-    }
-
-    /**
      * Send the SMS and store it in a database.
      */
     public function store()

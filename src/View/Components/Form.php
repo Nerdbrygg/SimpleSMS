@@ -8,14 +8,18 @@ class Form extends Component
 {
     public $title;
 
+    public $source;
+
     /**
      * Create a new component instance.
      *
+     *
      * @return void
      */
-    public function __construct($title = null)
+    public function __construct($title = null, bool $source = true)
     {
         $this->title = $title;
+        $this->source = $source;
     }
 
     /**

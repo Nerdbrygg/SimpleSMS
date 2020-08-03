@@ -38,6 +38,29 @@ SimpleSMS::to(<areacode><number>)->message(<message>)->from(<optional sender num
 | message() | Yes      | None    |
 | from()    | No       | SIMPLESMS_SOURCE |
 
+
+### Components
+
+**Form**
+
+``` html
+<x-simplesms-form title="Some Title (optional)" :source="true (default: true)"></x-simplesms-form>
+```
+
+Will render a basic bootstrap-themed form for sending an sms.
+
+Use `:source` parameter to stop source-field from rendering.
+
+**Messages**
+
+``` html
+<x-simplesms-messages title="Some Title (optional)"></x-simplesms-messages>
+```
+
+Will render a basic display of all sent messages.
+
+
+
 ## Change log
 
 Please see the [changelog](changelog.md) for more information on what has changed recently.
