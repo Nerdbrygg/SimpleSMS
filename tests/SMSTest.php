@@ -96,10 +96,12 @@ class SMSTest extends TestCase
 
         $this->assertDatabaseHas('simplemessages', [
             'destination' => '4711111111',
+            'message' => 'Test message',
         ]);
 
         $this->assertDatabaseHas('simplemessages', [
             'destination' => '4722222222',
+            'message' => 'Test message',
         ]);
     }
 }

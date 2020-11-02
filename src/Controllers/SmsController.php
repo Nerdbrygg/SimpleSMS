@@ -36,7 +36,9 @@ class SmsController extends Controller
                     ->message($attributes['message'])
                     ->from($attributes['source'])
                     ->send();
+            }
 
+            foreach ($destinations as $destination) {
                 if (config('simplesms.messages.save')) {
                     $attributes['status'] = $response->getReasonPhrase();
                     $attributes['destination'] = $destination;
