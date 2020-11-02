@@ -20,8 +20,6 @@ class SmsController extends Controller
             'message' => 'required',
         ]);
 
-
-
         if (! isset($attributes['source']) || is_null($attributes['source'])) {
             $attributes['source'] = config('simplesms.default.source', 'SimpleSMS');
         }
