@@ -82,4 +82,24 @@ class SMSTest extends TestCase
             'source' => 'TheForce',
         ]);
     }
+
+    /** @test */
+    public function it_can_send_to_multiple_receivers()
+    {
+        $this->post(route('sms.store'), [
+            'destination' => '4711111111, 4722222222',
+            'message' => 'Test message',
+            'source' => 'TheForce',
+        ]);
+
+        $this->assertDatabaseCount('simplemessages', 2);
+
+        $this->assertDatabaseHas('simplemessages', [
+            'destination' => '4711111111',
+        ]);
+
+        $this->assertDatabaseHas('simplemessages', [
+            'destination' => '4722222222',
+        ]);
+    }
 }
