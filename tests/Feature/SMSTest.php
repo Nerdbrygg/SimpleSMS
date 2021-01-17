@@ -1,10 +1,11 @@
 <?php
 
-namespace Nerdbrygg\SimpleSMS\Tests;
+namespace Nerdbrygg\SimpleSMS\Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
+use Nerdbrygg\SimpleSMS\Tests\TestCase;
 
 class SMSTest extends TestCase
 {
@@ -14,7 +15,7 @@ class SMSTest extends TestCase
     {
         parent::setUp();
 
-        $this->loadMigrationsFrom(realpath(__DIR__.'../database/migrations'));
+        $this->loadMigrationsFrom(realpath(__DIR__ . '../database/migrations'));
 
         Config::set('simplesms.messages.save', true);
 
@@ -26,7 +27,7 @@ class SMSTest extends TestCase
     /** @test */
     public function it_encrypts_messages()
     {
-        Config::set('simplesms.messages.encryption', true);
+        Config::set('simplesms.messages.encrypt', true);
 
         $this->post(route('sms.store'), [
             'destination' => '4711111111',
@@ -43,7 +44,7 @@ class SMSTest extends TestCase
     /** @test */
     public function it_doesnt_encrypt_messages()
     {
-        Config::set('simplesms.messages.encryption', false);
+        Config::set('simplesms.messages.encrypt', false);
 
         $this->post(route('sms.store'), [
             'destination' => '4711111111',
@@ -86,8 +87,10 @@ class SMSTest extends TestCase
     /** @test */
     public function it_can_send_to_multiple_receivers()
     {
+        Config::set('simplesms.messages.encrypt', false);
+
         $this->post(route('sms.store'), [
-            'destination' => '4711111111, 4722222222',
+            'destination' => '11111111, 4722222222',
             'message' => 'Test message',
             'source' => 'TheForce',
         ]);

@@ -8,16 +8,38 @@ use Nerdbrygg\SimpleSMS\SimpleSMS;
 
 class PSWinCom implements SMSProviderInterface
 {
-    public function send(SimpleSMS $sms)
+    protected const ENDPOINT_URI = 'https://simple.pswin.com/';
+    //protected const XMLFILE_PATH = 'Extras\PSWinCom.xml';
+    //protected const ENDPOINT_XML_URI = 'https://xml.pswin.com/';
+
+    public static function handle(SimpleSMS $sms)
     {
-        $attributes = [
-            'USER' => config('simplesms.pswincom.username'),
-            'PW' => config('simplesms.pswincom.password'),
-            'RCV' => $sms->getDestination(),
-            'SND' => $sms->getSource(),
-            'TXT' => $sms->getMessage(),
+        return (new static)->create($sms);
+    }
+
+    public function send($message)
+    {
+        return Http::asForm()->post(self::ENDPOINT_URI, $message);
+    }
+
+    protected function create($sms)
+    {
+        $messages = $sms->destination()->map(function ($number) use ($sms) {
+            return [
+                'text' => $sms->message(),
+                'snd' => $sms->source(),
+                'rcv' => $number
+            ];
+        })->toArray();
+
+        $session = [
+            'session' => [
+                'client' => 'username',
+                'pw' => 'password',
+                'msglst' => $messages
+            ]
         ];
 
-        return Http::asForm()->post(config('simplesms.pswincom.uri'), $attributes);
+        dd($session);
     }
 }

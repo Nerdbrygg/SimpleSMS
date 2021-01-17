@@ -16,9 +16,9 @@ class SimpleSMSServiceProvider extends ServiceProvider
     public function boot()
     {
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'nerdbrygg');
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'nerdbrygg');
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        $this->loadRoutesFrom(__DIR__.'/routes.php');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'nerdbrygg');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadRoutesFrom(__DIR__ . '/routes.php');
         $this->loadViewComponentsAs('simplesms', [
             Form::class,
             Messages::class,
@@ -37,7 +37,7 @@ class SimpleSMSServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/simplesms.php', 'simplesms');
+        $this->mergeConfigFrom(__DIR__ . '/../config/simplesms.php', 'simplesms');
 
         // Register the service the package provides.
         $this->app->singleton('simplesms', function ($app) {
@@ -64,12 +64,12 @@ class SimpleSMSServiceProvider extends ServiceProvider
     {
         // Publishing the configuration file.
         $this->publishes([
-            __DIR__.'/../config/simplesms.php' => config_path('simplesms.php'),
+            __DIR__ . '/../config/simplesms.php' => config_path('simplesms.php'),
         ], 'simplesms.config');
 
         // Publishing the views.
         $this->publishes([
-            __DIR__.'/../resources/views' => base_path('resources/views/vendor/nerdbrygg'),
+            __DIR__ . '/../resources/views' => base_path('resources/views/vendor/nerdbrygg'),
         ], 'simplesms.views');
 
         // Publishing assets.

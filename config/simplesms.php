@@ -13,6 +13,7 @@ return [
     */
     'default' => [
         'provider' => 'PSWinCom',
+        'countryCode' => 47,
         'source' => env('SIMPLESMS_SOURCE', 'SimpleSMS'),
     ],
 
@@ -29,7 +30,7 @@ return [
     */
     'messages' => [
         'save' => true,
-        'encryption' => true,
+        'encrypt' => true,
     ],
 
     /*
@@ -40,8 +41,7 @@ return [
     |
     |
     */
-    'pswincom' => [
-        'uri' => 'https://simple.pswin.com/',
+    'provider' => [
         'username' => env('SIMPLESMS_USERNAME'),
         'password' => env('SIMPLESMS_PASSWORD'),
     ],

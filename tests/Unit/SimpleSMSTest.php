@@ -1,6 +1,6 @@
 <?php
 
-namespace Nerdbrygg\SimpleSMS\Tests;
+namespace Nerdbrygg\SimpleSMS\Tests\Unit;
 
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
@@ -8,6 +8,7 @@ use Nerdbrygg\SimpleSMS\Exceptions\MissingParameter;
 use Nerdbrygg\SimpleSMS\Exceptions\ProviderNotFound;
 use Nerdbrygg\SimpleSMS\Facades\SimpleSMS;
 use Nerdbrygg\SimpleSMS\SimpleSMS as SimpleSMSClass;
+use Nerdbrygg\SimpleSMS\Tests\TestCase;
 
 class SimpleSMSTest extends TestCase
 {
@@ -57,8 +58,8 @@ class SimpleSMSTest extends TestCase
             return Http::response('OK', 200);
         });
 
-        $message = SimpleSMS::to('4711111111')->from('Hello World')->message('Hello Universe.');
+        $message = SimpleSMS::to('4711111111')->from('12345678')->message('Hello Universe.');
 
-        $this->assertEquals('Hello World', $message->getSource());
+        $this->assertEquals('12345678', $message->getSource());
     }
 }

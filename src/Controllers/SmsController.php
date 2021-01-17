@@ -3,7 +3,7 @@
 namespace Nerdbrygg\SimpleSMS\Controllers;
 
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Str;
+use Nerdbrygg\SimpleSMS\Support\NumberParser;
 use Nerdbrygg\SimpleSMS\Facades\SimpleSMS;
 use Nerdbrygg\SimpleSMS\SMS;
 
@@ -14,17 +14,46 @@ class SmsController extends Controller
      */
     public function store()
     {
-        $attributes = request()->validate([
+        SimpleSMS::send(request()->validate([
+            'source' => 'nullable',
+            'destination' => 'required',
+            'message' => 'required'
+        ]));
+
+        return redirect()->back();
+
+        /*$attributes = request()->validate([
             'source' => 'sometimes',
             'destination' => 'required',
             'message' => 'required',
         ]);
 
-        if (! isset($attributes['source']) || is_null($attributes['source'])) {
+        if (!isset($attributes['source']) || is_null($attributes['source'])) {
             $attributes['source'] = config('simplesms.default.source', 'SimpleSMS');
         }
 
-        if (Str::contains($attributes['destination'], ',')) {
+        $attributes['destination'] = NumberParser::parse($attributes['destination']);
+
+        $attributes['destination']->each(function ($number) use ($attributes) {
+            $response = SimpleSMS::to($number)
+                ->message($attributes['message'])
+                ->from($attributes['source'])
+                ->send();
+
+            $attributes['destination'] = $number;
+
+            $attributes['status'] = $response->getReasonPhrase();
+            $attributes['user_id'] = auth()->id() ?: null;
+
+            if (config('simplesms.messages.encrypt')) {
+                $attributes['message'] = encrypt($attributes['message']);
+            }
+
+            SMS::create($attributes);
+        });
+*/
+
+        /* if (Str::contains($attributes['destination'], ',')) {
             $destinations = explode(',', $attributes['destination']);
 
             foreach ($destinations as $destination) {
@@ -67,7 +96,7 @@ class SmsController extends Controller
 
                 SMS::create($attributes);
             }
-        }
+        } */
 
         return redirect()->back();
     }

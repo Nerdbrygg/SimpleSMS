@@ -8,5 +8,5 @@ class SMS extends Model
 {
     protected $table = 'simplemessages';
 
-    protected $fillable = ['source', 'destination', 'message', 'status', 'user_id'];
+    protected $guarded = [];
 }
