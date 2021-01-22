@@ -14,7 +14,7 @@ class XMLParser
 
     public function handle(array $xmlData)
     {
-        $xmlElement = new SimpleXMLElement('<' . strtoupper(array_keys($xmlData)[0]) . '/>');
+        $xmlElement = new SimpleXMLElement('<'.strtoupper(array_keys($xmlData)[0]).'/>');
 
         $xmlDocument = $this->xmlFromArray($xmlData[array_keys($xmlData)[0]], $xmlElement);
 
@@ -43,7 +43,7 @@ class XMLParser
         $xmlDOM = new DOMDocument();
         $xmlDOM->preserveWhiteSpace = false;
         $xmlDOM->formatOutput = true;
-        $xmlDOM->encoding = "UTF-8";
+        $xmlDOM->encoding = 'UTF-8';
         $xmlDOM->loadXML($xml);
 
         return $xmlDOM->saveXML();

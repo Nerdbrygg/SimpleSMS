@@ -15,7 +15,7 @@ class SMSTest extends TestCase
     {
         parent::setUp();
 
-        $this->loadMigrationsFrom(realpath(__DIR__ . '../database/migrations'));
+        $this->loadMigrationsFrom(realpath(__DIR__.'../database/migrations'));
 
         Config::set('simplesms.messages.save', true);
 
@@ -23,7 +23,6 @@ class SMSTest extends TestCase
             return Http::response('OK', 200);
         });
     }
-
 
     public function it_encrypts_messages()
     {
@@ -40,7 +39,6 @@ class SMSTest extends TestCase
 
         $this->assertDatabaseMissing('simplemessages', ['message' => 'Test message']);
     }
-
 
     public function it_doesnt_encrypt_messages()
     {
@@ -70,7 +68,6 @@ class SMSTest extends TestCase
         ]);
     }
 
-
     public function it_saves_the_source_in_the_database()
     {
         $this->post(route('sms.store'), [
@@ -83,7 +80,6 @@ class SMSTest extends TestCase
             'source' => 'TheForce',
         ]);
     }
-
 
     public function it_can_send_to_multiple_receivers()
     {

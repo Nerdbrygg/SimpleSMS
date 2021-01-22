@@ -30,10 +30,10 @@ class NumberParser
             return $number;
         }
 
-        if (!is_null($countryCode)) {
-            return $number = $countryCode . $number;
+        if (! is_null($countryCode)) {
+            return $number = $countryCode.$number;
         }
 
-        return config('simplesms.default.countryCode', 1) . $number;
+        return config('simplesms.default.countryCode', 1).$number;
     }
 }

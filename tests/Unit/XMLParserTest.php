@@ -25,7 +25,7 @@ class XMLParserTest extends TestCase
                 ],
             ],
         ];
-        $expected = "<?xml version=\"1.0\"?><SESSION><CLIENT>username</CLIENT><PW>password</PW><MSGLST><MSG><ID>1</ID><SND>sender</SND><RCV>receiver</RCV><TEXT>text</TEXT></MSG></MSGLST></SESSION>";
+        $expected = '<?xml version="1.0"?><SESSION><CLIENT>username</CLIENT><PW>password</PW><MSGLST><MSG><ID>1</ID><SND>sender</SND><RCV>receiver</RCV><TEXT>text</TEXT></MSG></MSGLST></SESSION>';
         $expected = $this->formatXML($expected);
 
         $this->assertEquals($expected, XMLParser::parse($message));
@@ -55,7 +55,7 @@ class XMLParserTest extends TestCase
             ],
         ];
 
-        $expected = "<?xml version=\"1.0\"?><SESSION><CLIENT>username</CLIENT><PW>password</PW><MSGLST><MSG><ID>1</ID><SND>sender</SND><RCV>receiver1</RCV><TEXT>text</TEXT></MSG><MSG><ID>2</ID><SND>sender</SND><RCV>receiver2</RCV><TEXT>text</TEXT></MSG></MSGLST></SESSION>";
+        $expected = '<?xml version="1.0"?><SESSION><CLIENT>username</CLIENT><PW>password</PW><MSGLST><MSG><ID>1</ID><SND>sender</SND><RCV>receiver1</RCV><TEXT>text</TEXT></MSG><MSG><ID>2</ID><SND>sender</SND><RCV>receiver2</RCV><TEXT>text</TEXT></MSG></MSGLST></SESSION>';
         $expected = $this->formatXML($expected);
 
         $this->assertEquals($expected, XMLParser::parse($messages));
