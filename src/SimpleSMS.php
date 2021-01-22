@@ -38,7 +38,7 @@ class SimpleSMS
 
     public static function create(array $sms)
     {
-        return (new static($sms));
+        return new static($sms);
     }
 
     public function source()
