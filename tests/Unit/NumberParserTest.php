@@ -21,6 +21,7 @@ class NumberParserTest extends TestCase
         $parsedNumbers = NumberParser::parse('4711111111, 4722222222');
 
         $this->assertCount(2, $parsedNumbers);
+        $this->assertEquals(collect(['4711111111', '4722222222']), $parsedNumbers);
     }
 
     /** @test */
@@ -38,7 +39,7 @@ class NumberParserTest extends TestCase
         $parsedNumbers = NumberParser::parse($numbers);
 
         $this->assertCount(2, $parsedNumbers);
-        $this->assertEquals(collect(preg_split('/ ?[,;|.] ?/', $numbers)), $parsedNumbers);
+        $this->assertEquals(collect(['4712345678', '4787654321']), $parsedNumbers);
     }
 
     /** @test */

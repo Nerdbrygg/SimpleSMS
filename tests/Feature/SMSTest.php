@@ -24,7 +24,7 @@ class SMSTest extends TestCase
         });
     }
 
-    /** @test */
+
     public function it_encrypts_messages()
     {
         Config::set('simplesms.messages.encrypt', true);
@@ -41,7 +41,7 @@ class SMSTest extends TestCase
         $this->assertDatabaseMissing('simplemessages', ['message' => 'Test message']);
     }
 
-    /** @test */
+
     public function it_doesnt_encrypt_messages()
     {
         Config::set('simplesms.messages.encrypt', false);
@@ -70,7 +70,7 @@ class SMSTest extends TestCase
         ]);
     }
 
-    /** @test */
+
     public function it_saves_the_source_in_the_database()
     {
         $this->post(route('sms.store'), [
@@ -84,7 +84,7 @@ class SMSTest extends TestCase
         ]);
     }
 
-    /** @test */
+
     public function it_can_send_to_multiple_receivers()
     {
         Config::set('simplesms.messages.encrypt', false);

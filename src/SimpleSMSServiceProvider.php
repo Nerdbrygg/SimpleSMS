@@ -40,9 +40,9 @@ class SimpleSMSServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/simplesms.php', 'simplesms');
 
         // Register the service the package provides.
-        $this->app->singleton('simplesms', function ($app) {
+/*         $this->app->singleton('simplesms', function ($app) {
             return new SimpleSMS;
-        });
+        }); */
     }
 
     /**

@@ -2,15 +2,14 @@
 
 namespace Nerdbrygg\SimpleSMS\Providers;
 
-use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
 use Nerdbrygg\SimpleSMS\Contracts\SMSProviderInterface;
 use Nerdbrygg\SimpleSMS\SimpleSMS;
+use Nerdbrygg\SimpleSMS\Support\XMLParser;
 
 class PSWinCom implements SMSProviderInterface
 {
-    protected const ENDPOINT_URI = 'https://simple.pswin.com/';
-    //protected const XMLFILE_PATH = 'Extras\PSWinCom.xml';
-    //protected const ENDPOINT_XML_URI = 'https://xml.pswin.com/';
+    protected const ENDPOINT_URI = 'https://xml.pswin.com';
 
     public static function handle(SimpleSMS $sms)
     {
@@ -19,7 +18,17 @@ class PSWinCom implements SMSProviderInterface
 
     public function send($message)
     {
-        return Http::asForm()->post(self::ENDPOINT_URI, $message);
+        $client = new Client();
+
+        $options = [
+            'headers' => [
+                'Content-Type' => 'text/xml; charset=utf-8',
+                'Content-Length' => strlen($message),
+            ],
+            'body' => $message,
+        ];
+
+        return $client->post(self::ENDPOINT_URI, $options);
     }
 
     protected function create($sms)
@@ -28,18 +37,18 @@ class PSWinCom implements SMSProviderInterface
             return [
                 'text' => $sms->message(),
                 'snd' => $sms->source(),
-                'rcv' => $number
+                'rcv' => $number,
             ];
         })->toArray();
 
         $session = [
             'session' => [
-                'client' => 'username',
-                'pw' => 'password',
-                'msglst' => $messages
-            ]
+                'client' => config('simplesms.provider.username'),
+                'pw' => config('simplesms.provider.password'),
+                'msglst' => $messages,
+            ],
         ];
 
-        dd($session);
+        return $this->send(XMLParser::parse($session));
     }
 }

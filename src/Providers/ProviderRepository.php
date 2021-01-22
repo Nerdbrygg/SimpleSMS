@@ -12,7 +12,7 @@ class ProviderRepository
      * @param  string $provider
      * @return Nerdbrygg\Contracts\SMSProviderInterface $class
      */
-    public function make($provider)
+    public static function make($provider)
     {
         $class = 'Nerdbrygg\\SimpleSMS\\Providers\\'.str_replace(' ', '', $provider);
 

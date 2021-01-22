@@ -2,10 +2,16 @@
 
 namespace Nerdbrygg\SimpleSMS\Support;
 
+use Nerdbrygg\SimpleSMS\Exceptions\MissingParameter;
+
 class NumberParser
 {
-    public static function parse(string $numbers)
+    public static function parse($numbers)
     {
+        if (is_null($numbers)) {
+            throw new MissingParameter('Please provide a destination');
+        }
+
         return (new static)->splitNumbers($numbers);
     }
 

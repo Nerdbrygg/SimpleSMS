@@ -2,7 +2,7 @@
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
-[![Build Status][ico-travis]][link-travis]
+![Tests](https://github.com/Nerdbrygg/SimpleSMS/workflows/Tests/badge.svg)
 [![StyleCI][ico-styleci]][link-styleci]
 
 My first Laravel Package, uses Laravel's Http client to interact with [PSWin.com's](https://wiki.pswin.com/Gateway%20HTTP%20API.ashx) Simple HTTP API.
@@ -25,21 +25,29 @@ SIMPLESMS_PASSWORD=
 ```
 
 ## Usage
+By default the only middleware applied to the route is web. To secure this, you'd need to overwrite the route:
+``` php
+Route::middleware(['auth'])->group(function () {
+    Route::post('sms/send', ['\Nerdbrygg\SimpleSMS\Controllers\SmsController', 'store'])->name('sms.store');
+});
+```
 
 ``` php
-SimpleSMS::to(<areacode><number>)->message(<message>)->from(<optional sender number>)->send();
+SimpleSMS::create(['message' => 'Hello World!', 'destination' => 'numbers [delimiters: ,;|.]', 'source' => 'Optional'])->send();
 ```
 
 ### Parameters
 
-| Parameter | Required | Default |
-|-----------|:--------:|---------|
-| to()      | Yes      | None    |
-| message() | Yes      | None    |
-| from()    | No       | SIMPLESMS_SOURCE |
+| Parameter     | Required | Default | Information              |
+|---------------|:--------:|:-------:|--------------------------|
+| message       | Yes      | None    | 804 characters max       |
+| destination   | Yes      | None    | Separated by ,;|.        |
+| source        | No       | SIMPLESMS_SOURCE | Number or text  |  
 
 
 ### Components
+
+I've created a couple of simple bootstrap-themed components to get you up and running faster.
 
 **Form**
 
@@ -47,9 +55,9 @@ SimpleSMS::to(<areacode><number>)->message(<message>)->from(<optional sender num
 <x-simplesms-form title="Some Title (optional)" :source="true (default: true)"></x-simplesms-form>
 ```
 
-Will render a basic bootstrap-themed form for sending an sms.
+Will render a basic form for sending an sms.
 
-Use `:source` parameter to stop source-field from rendering.
+Use `:source="false"` to stop source-field from rendering.
 
 **Messages**
 
@@ -58,8 +66,6 @@ Use `:source` parameter to stop source-field from rendering.
 ```
 
 Will render a basic display of all sent messages.
-
-
 
 ## Change log
 
@@ -90,12 +96,10 @@ license. Please see the [license file](license.md) for more information.
 
 [ico-version]: https://img.shields.io/packagist/v/nerdbrygg/simplesms.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/nerdbrygg/simplesms.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/nerdbrygg/simplesms/master.svg?style=flat-square
 [ico-styleci]: https://styleci.io/repos/281634119/shield
 
 [link-packagist]: https://packagist.org/packages/nerdbrygg/simplesms
 [link-downloads]: https://packagist.org/packages/nerdbrygg/simplesms
-[link-travis]: https://travis-ci.org/nerdbrygg/simplesms
 [link-styleci]: https://styleci.io/repos/281634119
 [link-author]: https://github.com/nerdbrygg
 [link-contributors]: ../../contributors

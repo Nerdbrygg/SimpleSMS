@@ -2,12 +2,12 @@
 
 namespace Nerdbrygg\SimpleSMS\Tests\Unit;
 
-use Illuminate\Http\Client\Response;
+use GuzzleHttp\Psr7\Response;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 use Nerdbrygg\SimpleSMS\Exceptions\MissingParameter;
 use Nerdbrygg\SimpleSMS\Exceptions\ProviderNotFound;
-use Nerdbrygg\SimpleSMS\Facades\SimpleSMS;
-use Nerdbrygg\SimpleSMS\SimpleSMS as SimpleSMSClass;
+use Nerdbrygg\SimpleSMS\SimpleSMS;
 use Nerdbrygg\SimpleSMS\Tests\TestCase;
 
 class SimpleSMSTest extends TestCase
@@ -17,7 +17,7 @@ class SimpleSMSTest extends TestCase
     {
         $this->expectException(MissingParameter::class);
 
-        SimpleSMS::to('4711111111')->send();
+        SimpleSMS::create(['message' => null, 'destination' => '4712345678'])->send();
     }
 
     /** @test */
@@ -25,7 +25,7 @@ class SimpleSMSTest extends TestCase
     {
         $this->expectException(MissingParameter::class);
 
-        SimpleSMS::message('Hello World.')->send();
+        SimpleSMS::create(['message' => 'Hello World.', 'destination' => null])->send();
     }
 
     /** @test */
@@ -33,9 +33,9 @@ class SimpleSMSTest extends TestCase
     {
         $this->expectException(ProviderNotFound::class);
 
-        $sms = new SimpleSMSClass('Non-existing-provider');
+        Config::set('simplesms.default.provider', 'Non-Existing-Provider');
 
-        $sms->message('Hello World.')->to('4711111111')->send();
+        SimpleSMS::create(['message' => 'Hello World.', 'destination' => '4712345678'])->send();
     }
 
     /** @test */
@@ -45,7 +45,9 @@ class SimpleSMSTest extends TestCase
             return Http::response('OK', 200);
         });
 
-        $response = SimpleSMS::to('4711111111')->message('Hello World.')->send();
+        Config::set('simplesms.messages.save', false);
+
+        $response = SimpleSMS::create(['message' => 'Hello World.', 'destination' => '4712345678'])->send();
 
         $this->assertInstanceOf(Response::class, $response);
         $this->assertEquals(200, $response->getStatusCode());
@@ -54,12 +56,8 @@ class SimpleSMSTest extends TestCase
     /** @test */
     public function it_can_change_the_source()
     {
-        Http::fake(function () {
-            return Http::response('OK', 200);
-        });
+        $message = SimpleSMS::create(['message' => 'Hello World.', 'destination' => '4712345678', 'source' => '4712345678']);
 
-        $message = SimpleSMS::to('4711111111')->from('12345678')->message('Hello Universe.');
-
-        $this->assertEquals('12345678', $message->getSource());
+        $this->assertEquals('4712345678', $message->source());
     }
 }
